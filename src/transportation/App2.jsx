@@ -5,7 +5,8 @@ import api from './api'
 
 function App2() {
     const [cities, setCities] = useState(api.price.fetchAll())
-    console.log('users', cities)
+    const [cars] = useState(api.price.fetchAllCars())
+
     const handleDelete = (cityId) => {
         setCities(cities.filter((city) => city._id !== cityId))
     }
@@ -25,6 +26,7 @@ function App2() {
             <SearchStatusDirection length={cities.length} />
             <Сities
                 cities={cities}
+                cars={cars}
                 onDelete={handleDelete}
                 onToggleBookMark={handleToggleBookMark}
             />

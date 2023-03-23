@@ -1,9 +1,34 @@
 const cars = {
-    standard: { _id: '67rdca3eeb7f6fgeed471818', priceKm: 20, hour: 700 },
-    elongated: { _id: '67rdca3eeb7f6fgeed471820', priceKm: 25, hour: 950 },
-    big: { _id: '67rdca3eeb7f6fgeed471814', priceKm: 30, hour: 1200 },
-    threetons: { _id: '67rdca3eeb7f6fgeed471822', priceKm: 35, hour: 1300 },
-    fivetons: { _id: '67rdca3eeb7f6fgeed471824', priceKm: 40, hour: 1500 }
+    standard: {
+        _id: '67rdca3eeb7f6fgeed471818',
+        name: 'Стандарт',
+        priceKm: 20,
+        hour: 700
+    },
+    elongated: {
+        _id: '67rdca3eeb7f6fgeed471820',
+        name: 'Удлиненная',
+        priceKm: 25,
+        hour: 950
+    },
+    big: {
+        _id: '67rdca3eeb7f6fgeed471814',
+        name: 'Большая',
+        priceKm: 30,
+        hour: 1200
+    },
+    threetons: {
+        _id: '67rdca3eeb7f6fgeed471822',
+        name: '3х тонник',
+        priceKm: 35,
+        hour: 1300
+    },
+    fivetons: {
+        _id: '67rdca3eeb7f6fgeed471824',
+        name: '5и тонник',
+        priceKm: 40,
+        hour: 1500
+    }
 }
 const price = [
     {
@@ -141,4 +166,8 @@ const price = [
 ]
 export function fetchAll() {
     return price
+}
+
+export function fetchAllCars() {
+    return cars
 }

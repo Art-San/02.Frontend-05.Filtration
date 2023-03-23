@@ -3,10 +3,11 @@ import { paginate } from '../utils/paginate'
 import Pagination from './Pagination'
 import Сiti from './Сiti'
 import PropTypes from 'prop-types'
-const Сities = ({ cities: allcities, ...rest }) => {
+const Сities = ({ cities: allcities, cars, ...rest }) => {
     const count = allcities.length
     const pageSize = 4
     const [currentPege, setCurrentPage] = useState(1)
+    // const carNames = Object.keys(cars).map(car => cars[car].name)
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
@@ -44,10 +45,32 @@ const Сities = ({ cities: allcities, ...rest }) => {
                 onPageChange={handlePageChange}
                 currentPege={currentPege}
             />
+            <table className="table">
+                <thead>
+                    <tr>
+                        {}
+                        <th scope="col">Город</th>
+                        <th scope="col">км</th>
+                        <th scope="col">Стандарт</th>
+                        <th scope="col">Удлинненая</th>
+                        <th scope="col">Большая</th>
+                        <th scope="col">3х тоннмк</th>
+                        <th scope="col">5и тонник</th>
+                        <th scope="col">Отметка</th>
+                        <th />
+                    </tr>
+                </thead>
+                <tbody>
+                    {cityGrop.map((city) => (
+                        <Сiti key={city._id} {...rest} {...city} />
+                    ))}
+                </tbody>
+            </table>
         </>
     )
 }
 Сities.propTypes = {
-    cities: PropTypes.array
+    cities: PropTypes.array,
+    cars: PropTypes.array
 }
 export default Сities
