@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { paginate } from '../utils/paginate'
 import Pagination from './Pagination'
 import User from './User'
+import GroupList from './GroupList'
 import PropTypes from 'prop-types'
 const Users = ({ users: allUsers, ...rest }) => {
     const count = allUsers.length
@@ -16,6 +17,7 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     return (
         <>
+            <GroupList items={allUsers} />
             {count > 0 && (
                 <table className="table">
                     <thead>
