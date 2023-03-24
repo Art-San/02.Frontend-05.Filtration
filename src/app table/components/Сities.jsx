@@ -54,6 +54,6 @@ const Сities = ({ cities: allcities, cars, ...rest }) => {
 }
 Сities.propTypes = {
     cities: PropTypes.array,
-    cars: PropTypes.array
+    cars: PropTypes.object
 }
 export default Сities

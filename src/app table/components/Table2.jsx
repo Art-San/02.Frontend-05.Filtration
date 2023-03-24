@@ -44,13 +44,50 @@ const Table = ({ onToggleBookMark }) => {
     //     console.log(id)
     // }
 
+    // Работает
+    // const toggleFavorite = (index) => {
+    //     setData((prevData) => {
+    //         const updatedData = prevData.map((item, i) => {
+    //             if (i === index) {
+    //                 return {
+    //                     ...item,
+    //                     isFavorite: !item.isFavorite
+    //                 }
+    //             }
+    //             return item
+    //         })
+    //         return updatedData
+    //     })
+    // }
+
+    // работает
+    // Здесь мы создаем новый массив с помощью Object.assign(),
+    // заменяя элемент с индексом index на новый объект,
+    // в котором свойство isFavorite инвертировано.
     const toggleFavorite = (index) => {
         setData((prevData) => {
-            const newData = [...prevData]
-            newData[index].isFavorite = !prevData[index].isFavorite
-            return newData
+            return Object.assign([], prevData, {
+                [index]: {
+                    ...prevData[index],
+                    isFavorite: !prevData[index].isFavorite
+                }
+            })
         })
     }
+
+    // const toggleFavorite = (index) => {
+    //     const newData = [...data]
+    //     newData[index].isFavorite = !newData[index].isFavorite
+    //     setData(newData)
+    // }
+    // Не работает
+    // const toggleFavorite = (index) => {
+    //     setData((prevData) => {
+    //         const newData = [...data]
+    //         newData[index].isFavorite = !newData[index].isFavorite
+    //         return newData
+    //     })
+    // }
 
     return (
         <table>
@@ -60,6 +97,7 @@ const Table = ({ onToggleBookMark }) => {
                     <th>Возраст</th>
                     <th>Телефон</th>
                     <th>Email</th>
+                    <th>Избранное</th>
                     <th>Избранное</th>
                     <th>Удалить</th>
                 </tr>
