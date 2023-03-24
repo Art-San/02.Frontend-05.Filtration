@@ -3,6 +3,8 @@ import { paginate } from '../utils/paginate'
 import Pagination from './Pagination'
 import Сiti from './Сiti'
 import PropTypes from 'prop-types'
+import Table from './Table'
+import Table2 from './Table2'
 
 const Сities = ({ cities: allcities, cars, ...rest }) => {
     const count = allcities.length
@@ -39,12 +41,14 @@ const Сities = ({ cities: allcities, cars, ...rest }) => {
                     </tbody>
                 </table>
             )}
+            <Table cars={cars} settlements={cityGrop} />
             <Pagination
                 itemsCount={count}
                 pageSize={pageSize}
                 onPageChange={handlePageChange}
                 currentPege={currentPege}
             />
+            <Table2 {...rest} />
         </>
     )
 }
