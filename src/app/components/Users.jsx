@@ -9,6 +9,7 @@ import api from '../api/index'
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPege, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState({})
+    const [selectedProf, setSelectedProf] = useState()
     const count = allUsers.length
     const pageSize = 4
 
@@ -18,8 +19,9 @@ const Users = ({ users: allUsers, ...rest }) => {
         })
     }, [])
 
-    const handleProfessions = (id) => {
-        console.log(id)
+    const handleProfessions = (item) => {
+        setSelectedProf(item)
+        console.log(item)
     }
 
     const handlePageChange = (pageIndex) => {
@@ -32,10 +34,9 @@ const Users = ({ users: allUsers, ...rest }) => {
         <>
             {professions && (
                 <GroupList
+                    selectedItem={selectedProf}
                     items={professions}
                     onItemSelect={handleProfessions}
-                    // valueProperty="_id"
-                    // contentProperty="name"
                 />
             )}
             {count > 0 && (
