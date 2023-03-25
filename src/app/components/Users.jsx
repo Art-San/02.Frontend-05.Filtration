@@ -34,8 +34,8 @@ const Users = ({ users: allUsers, ...rest }) => {
                 <GroupList
                     items={professions}
                     onItemSelect={handleProfessions}
-                    valueProperty="_id"
-                    contentProperty="name"
+                    // valueProperty="_id"
+                    // contentProperty="name"
                 />
             )}
             {count > 0 && (
