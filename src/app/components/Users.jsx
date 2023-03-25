@@ -15,9 +15,20 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => {
+            // сброс фильтрации 2 вар
             setProfessions(data)
         })
     }, [])
+
+    // useEffect(() => {
+    //     api.professions.fetchAll().then((data) => {
+    //         setProfessions(
+    //             Object.assign(data, {
+    //                 allProfession: { name: 'Все профессии' } // сброс фильтрации 1 вар с масивами это не работает
+    //             })
+    //         )
+    //     })
+    // }, [])
 
     const handleProfessions = (item) => {
         setSelectedProf(item)
@@ -28,20 +39,39 @@ const Users = ({ users: allUsers, ...rest }) => {
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
-    const filteredUsers = selectedProf // Реализация фильтрации
+
+    const filteredUsers = selectedProf
         ? allUsers.filter((user) => user.profession === selectedProf)
         : allUsers
-    console.log('filteredUsers', filteredUsers)
+
+    // const filteredUsers =
+    //     selectedProf && selectedProf._id // сброс фильтрации 1 вар с масивами это не работает
+    //         ? allUsers.filter((user) => user.profession === selectedProf)
+    //         : allUsers
+
     const userGrop = paginate(filteredUsers, currentPege, pageSize)
+
+    const clearFilter = () => {
+        // сброс фильтрации 2 вар
+        setSelectedProf()
+    }
 
     return (
         <>
             {professions && (
-                <GroupList
-                    selectedItem={selectedProf}
-                    items={professions}
-                    onItemSelect={handleProfessions}
-                />
+                <>
+                    <GroupList
+                        selectedItem={selectedProf}
+                        items={professions}
+                        onItemSelect={handleProfessions}
+                    />
+                    <button
+                        className="btn btn-secondary mt-2"
+                        onClick={clearFilter} // сброс фильтрации 2 вар
+                    >
+                        Сброс
+                    </button>
+                </>
             )}
             {count > 0 && (
                 <div className="table-responsive-sm">
