@@ -8,7 +8,7 @@ import api from '../api/index'
 
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPege, setCurrentPage] = useState(1)
-    const [professions, setProfessions] = useState({})
+    const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
     const count = allUsers.length
     const pageSize = 4
@@ -21,14 +21,18 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     const handleProfessions = (item) => {
         setSelectedProf(item)
-        console.log(item)
     }
+
+    console.log('selectedProf', selectedProf)
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
-
-    const userGrop = paginate(allUsers, currentPege, pageSize)
+    const filteredUsers = selectedProf // Реализация фильтрации
+        ? allUsers.filter((user) => user.profession === selectedProf)
+        : allUsers
+    console.log('filteredUsers', filteredUsers)
+    const userGrop = paginate(filteredUsers, currentPege, pageSize)
 
     return (
         <>
@@ -40,24 +44,26 @@ const Users = ({ users: allUsers, ...rest }) => {
                 />
             )}
             {count > 0 && (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Качества</th>
-                            <th scope="col">Провфессия</th>
-                            <th scope="col">Встретился, раз</th>
-                            <th scope="col">Оценка</th>
-                            <th scope="col">Избранное</th>
-                            <th />
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {userGrop.map((user) => (
-                            <User key={user._id} {...rest} {...user} />
-                        ))}
-                    </tbody>
-                </table>
+                <div className="table-responsive-sm">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Качества</th>
+                                <th scope="col">Провфессия</th>
+                                <th scope="col">Встретился, раз</th>
+                                <th scope="col">Оценка</th>
+                                <th scope="col">Избранное</th>
+                                <th />
+                            </tr>
+                        </thead>
+                        <tbody className="table-group-divider">
+                            {userGrop.map((user) => (
+                                <User key={user._id} {...rest} {...user} />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
             <Pagination
                 itemsCount={count}
