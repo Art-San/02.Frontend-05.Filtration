@@ -8,7 +8,7 @@ import api from '../api/index'
 
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPege, setCurrentPage] = useState(1)
-    const [professions, setProfessions] = useState({})
+    const [professions, setProfessions] = useState({}) // Отображение элементов со скобками работае и без условного рендера
     const count = allUsers.length
     const pageSize = 4
 
@@ -30,7 +30,7 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     return (
         <>
-            {professions && (
+            {professions && ( // Отображение элементов (условный рендер)
                 <GroupList
                     items={professions}
                     onItemSelect={handleProfessions}

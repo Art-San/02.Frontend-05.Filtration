@@ -2,22 +2,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const GroupList = ({ items, valueProperty, contentProperty, onItemSelec }) => {
-    // const keyItems = Object.keys(items)
+    // const keyItems = Object.keys(items) // Отображение элементов 1-вар
     return (
         <ul className="list-group">
-            {/* {keyItems.map((item, index) => (
+            {/* {keyItems.map((item, index) => ( // Отображение элементов 1 - вар
                 <li className="list-group-item" key={index}>
                     {items[item].name}
                 </li>
             ))} */}
-            {Object.keys(items).map((item, index) => (
-                <li
-                    className="list-group-item"
-                    key={items[item][valueProperty]}
-                >
-                    {items[item][contentProperty]}
-                </li>
-            ))}
+            {Object.keys(items).map(
+                // Отображение элементов Object.keys- не будет работать с МАССИВАМИ
+                (item, index) => (
+                    <li
+                        className="list-group-item"
+                        key={items[item][valueProperty]}
+                    >
+                        {items[item][contentProperty]}
+                    </li>
+                )
+            )}
             {/* <li className="list-group-item">An item</li>
             <li className="list-group-item">A second item</li>
             <li className="list-group-item">A third item</li>
