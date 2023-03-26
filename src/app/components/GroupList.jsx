@@ -17,7 +17,6 @@ const GroupList = ({
                         (items[item] === selectedItem ? ' active' : '')
                     }
                     onClick={() => onItemSelect(items[item])}
-                    // key={index} // сброс фильтрации 1 вар с масивами это не работает
                     key={items[item][valueProperty]}
                     role="button"
                 >

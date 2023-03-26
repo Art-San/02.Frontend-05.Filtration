@@ -5,30 +5,23 @@ import User from './User'
 import GroupList from './GroupList'
 import PropTypes from 'prop-types'
 import api from '../api/index'
+import SearchStatus from './SearchStatus'
 
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPege, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
-    const count = allUsers.length
+
     const pageSize = 4
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => {
-            // сброс фильтрации 2 вар
             setProfessions(data)
         })
     }, [])
-
-    // useEffect(() => {
-    //     api.professions.fetchAll().then((data) => {
-    //         setProfessions(
-    //             Object.assign(data, {
-    //                 allProfession: { name: 'Все профессии' } // сброс фильтрации 1 вар с масивами это не работает
-    //             })
-    //         )
-    //     })
-    // }, [])
+    useEffect(() => {
+        setCurrentPage(1) // ошибка исправлена //Рефакторинг
+    }, [selectedProf])
 
     const handleProfessions = (item) => {
         setSelectedProf(item)
@@ -43,23 +36,17 @@ const Users = ({ users: allUsers, ...rest }) => {
     const filteredUsers = selectedProf
         ? allUsers.filter((user) => user.profession === selectedProf)
         : allUsers
-
-    // const filteredUsers =
-    //     selectedProf && selectedProf._id // сброс фильтрации 1 вар с масивами это не работает
-    //         ? allUsers.filter((user) => user.profession === selectedProf)
-    //         : allUsers
-
+    const count = filteredUsers.length // исправление ошибок количечтво пользователей
     const userGrop = paginate(filteredUsers, currentPege, pageSize)
 
     const clearFilter = () => {
-        // сброс фильтрации 2 вар
         setSelectedProf()
     }
 
     return (
-        <>
+        <div className="d-flex">
             {professions && (
-                <>
+                <div className="d-flex flex-column flex-shrink-0 p-3">
                     <GroupList
                         selectedItem={selectedProf}
                         items={professions}
@@ -67,14 +54,15 @@ const Users = ({ users: allUsers, ...rest }) => {
                     />
                     <button
                         className="btn btn-secondary mt-2"
-                        onClick={clearFilter} // сброс фильтрации 2 вар
+                        onClick={clearFilter}
                     >
                         Сброс
                     </button>
-                </>
+                </div>
             )}
-            {count > 0 && (
-                <div className="table-responsive-sm">
+            <div className="d-flex flex-column">
+                <SearchStatus length={count} />
+                {count > 0 && (
                     <table className="table">
                         <thead>
                             <tr>
@@ -93,15 +81,17 @@ const Users = ({ users: allUsers, ...rest }) => {
                             ))}
                         </tbody>
                     </table>
+                )}
+                <div className="d-flex justify-content-center">
+                    <Pagination
+                        itemsCount={count}
+                        pageSize={pageSize}
+                        onPageChange={handlePageChange}
+                        currentPege={currentPege}
+                    />
                 </div>
-            )}
-            <Pagination
-                itemsCount={count}
-                pageSize={pageSize}
-                onPageChange={handlePageChange}
-                currentPege={currentPege}
-            />
-        </>
+            </div>
+        </div>
     )
 }
 Users.propTypes = {
