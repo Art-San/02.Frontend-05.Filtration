@@ -15,20 +15,9 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => {
-            // сброс фильтрации 2 вар
             setProfessions(data)
         })
     }, [])
-
-    // useEffect(() => {
-    //     api.professions.fetchAll().then((data) => {
-    //         setProfessions(
-    //             Object.assign(data, {
-    //                 allProfession: { name: 'Все профессии' } // сброс фильтрации 1 вар с масивами это не работает
-    //             })
-    //         )
-    //     })
-    // }, [])
 
     const handleProfessions = (item) => {
         setSelectedProf(item)
@@ -44,15 +33,9 @@ const Users = ({ users: allUsers, ...rest }) => {
         ? allUsers.filter((user) => user.profession === selectedProf)
         : allUsers
 
-    // const filteredUsers =
-    //     selectedProf && selectedProf._id // сброс фильтрации 1 вар с масивами это не работает
-    //         ? allUsers.filter((user) => user.profession === selectedProf)
-    //         : allUsers
-
     const userGrop = paginate(filteredUsers, currentPege, pageSize)
 
     const clearFilter = () => {
-        // сброс фильтрации 2 вар
         setSelectedProf()
     }
 
@@ -67,7 +50,7 @@ const Users = ({ users: allUsers, ...rest }) => {
                     />
                     <button
                         className="btn btn-secondary mt-2"
-                        onClick={clearFilter} // сброс фильтрации 2 вар
+                        onClick={clearFilter}
                     >
                         Сброс
                     </button>
