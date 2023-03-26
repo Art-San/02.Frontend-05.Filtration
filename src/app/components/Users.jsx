@@ -9,7 +9,7 @@ import api from '../api/index'
 const Users = ({ users: allUsers, ...rest }) => {
     const [currentPege, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState({})
-    const [selectedProf, setSelectedProf] = useState()
+    const [selectedProf, setSelectedProf] = useState() // Обработка выбора
     const count = allUsers.length
     const pageSize = 4
 
@@ -20,6 +20,7 @@ const Users = ({ users: allUsers, ...rest }) => {
     }, [])
 
     const handleProfessions = (item) => {
+        // Обработка выбора
         setSelectedProf(item)
         console.log(item)
     }
@@ -34,7 +35,7 @@ const Users = ({ users: allUsers, ...rest }) => {
         <>
             {professions && (
                 <GroupList
-                    selectedItem={selectedProf}
+                    selectedItem={selectedProf} // Обработка выбора
                     items={professions}
                     onItemSelect={handleProfessions}
                 />

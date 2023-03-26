@@ -14,9 +14,9 @@ const GroupList = ({
                 <li
                     className={
                         'list-group-item' +
-                        (items[item] === selectedItem ? ' active' : '')
+                        (items[item] === selectedItem ? ' active' : '') // Обработка выбора
                     }
-                    onClick={() => onItemSelect(items[item])}
+                    onClick={() => onItemSelect(items[item])} // Обработка выбора (передаем сам объект)
                     key={items[item][valueProperty]}
                     role="button"
                 >
