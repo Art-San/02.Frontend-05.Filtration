@@ -17,6 +17,7 @@ const GroupList = ({ items, valueProperty, contentProperty, onItemSelec }) => {
 }
 
 GroupList.defaultProps = {
+    // Свойства по умолчанию - defaultprops неправильно, P- большая нужна
     valueProperty: '_id',
     contentProperty: 'name'
 }
