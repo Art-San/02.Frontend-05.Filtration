@@ -60,7 +60,7 @@ const Users = ({ users: allUsers, ...rest }) => {
                     </button>
                 </div>
             )}
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column table-responsive-sm">
                 <SearchStatus length={count} />
                 {count > 0 && (
                     <table className="table">
