@@ -20,7 +20,7 @@ const Users = ({ users: allUsers, ...rest }) => {
         })
     }, [])
     useEffect(() => {
-        setCurrentPage(1) // ошибка исправлена //Рефакторинг
+        setCurrentPage(1) // ошибка пропаданни людей исправлена  //Рефакторинг
     }, [selectedProf])
 
     const handleProfessions = (item) => {
