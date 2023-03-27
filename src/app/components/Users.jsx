@@ -20,7 +20,7 @@ const Users = ({ users: allUsers, ...rest }) => {
         })
     }, [])
     useEffect(() => {
-        setCurrentPage(1) // ошибка пропаданни людей исправлена  //Рефакторинг
+        setCurrentPage(1)
     }, [selectedProf])
 
     const handleProfessions = (item) => {
@@ -36,7 +36,7 @@ const Users = ({ users: allUsers, ...rest }) => {
     const filteredUsers = selectedProf
         ? allUsers.filter((user) => user.profession === selectedProf)
         : allUsers
-    const count = filteredUsers.length // исправление ошибок количечтво пользователей
+    const count = filteredUsers.length
     const userGrop = paginate(filteredUsers, currentPege, pageSize)
 
     const clearFilter = () => {
