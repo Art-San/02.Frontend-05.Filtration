@@ -39,7 +39,6 @@ const Users = ({ users: allUsers, ...rest }) => {
           )
         : allUsers
 
-    // console.log('filteredUsers', filteredUsers)
     const count = filteredUsers.length
     const userGrop = paginate(filteredUsers, currentPege, pageSize)
 

@@ -9,7 +9,6 @@ const GroupList = ({
     selectedItem
 }) => {
     if (!Array.isArray(items)) {
-        // Проверка масив иле не масив console.log(!Array.isArray(items)) // false
         return (
             <ul className="list-group">
                 {Object.keys(items).map((item) => (
@@ -52,8 +51,7 @@ GroupList.defaultProps = {
     contentProperty: 'name'
 }
 GroupList.propTypes = {
-    // items: PropTypes.object,
-    items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]), // два типа данных object и array
+    items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     onItemSelect: PropTypes.func,
     valueProperty: PropTypes.string.isRequired,
     contentProperty: PropTypes.string.isRequired,
