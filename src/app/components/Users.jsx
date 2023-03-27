@@ -27,15 +27,19 @@ const Users = ({ users: allUsers, ...rest }) => {
         setSelectedProf(item)
     }
 
-    console.log('selectedProf', selectedProf)
-
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
 
     const filteredUsers = selectedProf
-        ? allUsers.filter((user) => user.profession === selectedProf)
+        ? allUsers.filter(
+              (user) =>
+                  JSON.stringify(user.profession) ===
+                  JSON.stringify(selectedProf)
+          )
         : allUsers
+
+    // console.log('filteredUsers', filteredUsers)
     const count = filteredUsers.length
     const userGrop = paginate(filteredUsers, currentPege, pageSize)
 

@@ -8,19 +8,39 @@ const GroupList = ({
     onItemSelect,
     selectedItem
 }) => {
+    if (!Array.isArray(items)) {
+        // Проверка масив иле не масив console.log(!Array.isArray(items)) // false
+        return (
+            <ul className="list-group">
+                {Object.keys(items).map((item) => (
+                    <li
+                        key={items[item][valueProperty]}
+                        className={
+                            'list-group-item' +
+                            (items[item] === selectedItem ? ' active' : '')
+                        }
+                        onClick={() => onItemSelect(items[item])}
+                        role="button"
+                    >
+                        {items[item][contentProperty]}
+                    </li>
+                ))}
+            </ul>
+        )
+    }
     return (
         <ul className="list-group">
-            {Object.keys(items).map((item, index) => (
+            {items.map((item) => (
                 <li
                     className={
                         'list-group-item' +
-                        (items[item] === selectedItem ? ' active' : '')
+                        (item === selectedItem ? ' active' : '')
                     }
-                    onClick={() => onItemSelect(items[item])}
-                    key={items[item][valueProperty]}
+                    onClick={() => onItemSelect(item)}
+                    key={item._id}
                     role="button"
                 >
-                    {items[item][contentProperty]}
+                    {item[contentProperty]}
                 </li>
             ))}
         </ul>
@@ -32,7 +52,8 @@ GroupList.defaultProps = {
     contentProperty: 'name'
 }
 GroupList.propTypes = {
-    items: PropTypes.object,
+    // items: PropTypes.object,
+    items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]), // два типа данных object и array
     onItemSelect: PropTypes.func,
     valueProperty: PropTypes.string.isRequired,
     contentProperty: PropTypes.string.isRequired,
